@@ -10,13 +10,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,10 +36,34 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        client = new OkHttpClient();
+//        client = new OkHttpClient();
+//
+//
+//            run(url);
 
+        Observable<ResultApi> observable = RetrofitHelper.Factory.getUsers();
 
-            run(url);
+        observable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResultApi>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(TAG, "onError: " + e.toString());
+                    }
+
+                    @Override
+                    public void onNext(ResultApi resultApi) {
+                        for (Result result : resultApi.getResults())
+                            Log.d(TAG, "onCreate: " + result.toString());
+                    }
+                });
+
 
     }
 
