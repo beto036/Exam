@@ -261,4 +261,21 @@ public class Result {
         this.nat = nat;
     }
 
+    @Override
+    public String toString() {
+        return "Result{" +
+                "gender='" + gender + '\'' +
+                ", name=" + name +
+                ", location=" + location +
+                ", email='" + email + '\'' +
+                ", login=" + login +
+                ", dob='" + dob + '\'' +
+                ", registered='" + registered + '\'' +
+                ", phone='" + phone + '\'' +
+                ", cell='" + cell + '\'' +
+                ", id=" + id +
+                ", picture=" + picture +
+                ", nat='" + nat + '\'' +
+                '}';
+    }
 }
