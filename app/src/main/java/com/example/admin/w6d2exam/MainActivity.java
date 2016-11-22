@@ -35,15 +35,12 @@ public class MainActivity extends AppCompatActivity {
 
         client = new OkHttpClient();
 
-        try {
+
             run(url);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
 
-    void run(String url) throws IOException {
+    void run(String url) {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
