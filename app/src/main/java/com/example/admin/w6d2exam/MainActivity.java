@@ -1,0 +1,28 @@
+package com.example.admin.w6d2exam;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+
+import com.example.admin.w6d2exam.model.Result;
+import com.example.admin.w6d2exam.model.ResultApi;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MAinActivityTAG_";
+    public final String json = "{\"results\":[{\"gender\":\"female\",\"name\":{\"title\":\"mrs\",\"first\":\"laura\",\"last\":\"prieto\"},\"location\":{\"street\":\"4215 calle de ángel garcía\",\"city\":\"móstoles\",\"state\":\"comunidad de madrid\",\"postcode\":38148},\"email\":\"laura.prieto@example.com\",\"login\":{\"username\":\"orangegorilla186\",\"password\":\"father\",\"salt\":\"V21ZXEXi\",\"md5\":\"16fd0fcfdf8394d34f78eac8d937ea0d\",\"sha1\":\"8ff0cacf4eb64034abfc7aaef693a1caf4d4e16a\",\"sha256\":\"79df9ca6cf23d1884e2fc75ab89044b8a6146fbf90369403c901b78a60d5ee5c\"},\"dob\":\"1961-09-11 20:56:33\",\"registered\":\"2012-06-06 23:33:46\",\"phone\":\"915-925-889\",\"cell\":\"637-679-236\",\"id\":{\"name\":\"DNI\",\"value\":\"67715235-M\"},\"picture\":{\"large\":\"https://randomuser.me/api/portraits/women/50.jpg\",\"medium\":\"https://randomuser.me/api/portraits/med/women/50.jpg\",\"thumbnail\":\"https://randomuser.me/api/portraits/thumb/women/50.jpg\"},\"nat\":\"ES\"}],\"info\":{\"seed\":\"064354194cc5be6b\",\"results\":1,\"page\":1,\"version\":\"1.1\"}}";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Gson gson = new GsonBuilder().create();
+        ResultApi resultApi = gson.fromJson(json, ResultApi.class);
+        for (Result result : resultApi.getResults())
+            Log.d(TAG, "onCreate: " + result.toString());
+
+    }
+}
